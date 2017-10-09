@@ -3,6 +3,7 @@
 
 from xml.sax import make_parser
 from xml.sax.handler import ContentHandler
+from urllib.request import urlretrieve
 import sys
 import smallsmilhandler
 import json
@@ -23,5 +24,8 @@ if __name__ == "__main__":
         for atributo in etiqueta:
             if atributo != 'name':
                 lista.append('\t' + atributo + '="' + etiqueta[atributo] +'"')
+                if atributo == 'src' and not etiqueta[atributo].find('http'):
+                    nombre = etiqueta[atributo]
+                    urlretrieve(nombre, nombre.split('/')[-1])
         print(' '.join(lista))
     json.dump(smilhandler.etiquetas, open('karaoke.json', 'w'))
