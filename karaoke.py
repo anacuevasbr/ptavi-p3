@@ -18,9 +18,9 @@ if __name__ == "__main__":
 
     for etiqueta in smilhandler.etiquetas:
         lista = []
-        lista.append(etiqueta['nombre'])
+        lista.append(etiqueta['name'])
         for atributo in etiqueta:
-            if atributo != 'nombre':
-                lista.append(atributo)
-                lista.append(etiqueta[atributo])
-        print(lista.join())
+            if atributo != 'name':
+                lista.append('\t' + atributo + '="' + etiqueta[atributo] +'"')
+       print(' '.join(lista))
+
