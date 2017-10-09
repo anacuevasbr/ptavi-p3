@@ -5,6 +5,7 @@ from xml.sax import make_parser
 from xml.sax.handler import ContentHandler
 import sys
 import smallsmilhandler
+import json
 
 if __name__ == "__main__":
 
@@ -24,3 +25,4 @@ if __name__ == "__main__":
                 lista.append('\t' + atributo + '="' + etiqueta[atributo] +'"')
        print(' '.join(lista))
 
+    json.dump(smilhandler.etiquetas, karaoke.json)
