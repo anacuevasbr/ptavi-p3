@@ -4,9 +4,10 @@
 from xml.sax import make_parser
 from xml.sax.handler import ContentHandler
 
+
 class SmallSMILHandler(ContentHandler):
 
-    def __init__ (self):
+    def __init__(self):
         """
         Constructor. Inicializamos las variables
         """
@@ -15,13 +16,13 @@ class SmallSMILHandler(ContentHandler):
     def startElement(self, name, attrs):
 
         if name == "root-layout":
-            root_layout = {'etiqueta': 'root-layout'}
+            root_layout = {'nombre': 'root-layout'}
             root_layout['width'] = attrs.get('width', "")
             root_layout['height'] = attrs.get('height', "")
             root_layout['background-color'] = attrs.get('background-color', "")
             self.etiquetas.append(root_layout)
         elif name == "region":
-            region = {'etiqueta' : 'region'}
+            region = {'nombre': 'region'}
             region['id'] = attrs.get('id', "")
             region['top'] = attrs.get('top', "")
             region['bottom'] = attrs.get('bottom', "")
@@ -29,20 +30,20 @@ class SmallSMILHandler(ContentHandler):
             region['right'] = attrs.get('right', "")
             self.etiquetas.append(region)
         elif name == "img":
-            img = {'etiqueta' : 'img'}
+            img = {'nombre': 'img'}
             img['src'] = attrs.get('src', "")
             img['region'] = attrs.get('region', "")
             img['begin'] = attrs.get('begin', "")
             img['dur'] = attrs.get('dur', "")
             self.etiquetas.append(img)
         elif name == "audio":
-            audio = {'etiqueta' : 'audio'}
+            audio = {'nombre': 'audio'}
             audio['src'] = attrs.get('src', "")
             audio['begin'] = attrs.get('begin', "")
             audio['dur'] = attrs.get('dur', "")
             self.etiquetas.append(audio)
         elif name == "textstream":
-            textstream = {'etiqueta' : 'textstream'}
+            textstream = {'nombre': 'textstream'}
             textstream['src'] = attrs.get('src', "")
             textstream['region'] = attrs.get('region', "")
             self.etiquetas.append(textstream)
@@ -60,4 +61,4 @@ if __name__ == "__main__":
     parser.parse(open('karaoke.smil'))
     smilhandler.get_tags()
     for etiqueta in smilhandler.etiquetas:
-        print(etiqueta['etiqueta'])
+        print(etiqueta['nombre'])
