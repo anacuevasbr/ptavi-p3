@@ -21,16 +21,30 @@ class SmallSMILHandler(ContentHandler):
             root_layout['background-color'] = attrs.get('background-color', "")
             self.etiquetas.append(root_layout)
         elif name == "region":
-            region = {}
+            region = {'etiqueta' : 'region'}
+            region['id'] = attrs.get('id', "")
+            region['top'] = attrs.get('top', "")
+            region['bottom'] = attrs.get('bottom', "")
+            region['left'] = attrs.get('left', "")
+            region['right'] = attrs.get('right', "")
             self.etiquetas.append(region)
         elif name == "img":
-            img = {}
+            img = {'etiqueta' : 'img'}
+            img['src'] = attrs.get('src', "")
+            img['region'] = attrs.get('region', "")
+            img['begin'] = attrs.get('begin', "")
+            img['dur'] = attrs.get('dur', "")
             self.etiquetas.append(img)
         elif name == "audio":
-            audio = {}            
+            audio = {'etiqueta' : 'audio'}
+            audio['src'] = attrs.get('src', "")
+            audio['begin'] = attrs.get('begin', "")
+            audio['dur'] = attrs.get('dur', "")
             self.etiquetas.append(audio)
         elif name == "textstream":
-            textstream = {}
+            textstream = {'etiqueta' : 'textstream'}
+            textstream['src'] = attrs.get('src', "")
+            textstream['region'] = attrs.get('region', "")
             self.etiquetas.append(textstream)
 
 if __name__ == "__main__":
@@ -43,4 +57,5 @@ if __name__ == "__main__":
     parser.parse(open('karaoke.smil'))
     print(smilhandler.etiquetas)
     print(smilhandler.etiquetas[0])
-    print(smilhandler.etiquetas[0]['etiqueta'])
+    for etiqueta in smilhandler.etiquetas:
+        print(etiqueta['etiqueta'])
