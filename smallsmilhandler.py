@@ -47,6 +47,9 @@ class SmallSMILHandler(ContentHandler):
             textstream['region'] = attrs.get('region', "")
             self.etiquetas.append(textstream)
 
+    def get_tags(self):
+        print(self.etiquetas)
+
 if __name__ == "__main__":
     """
     Programa principal
@@ -55,7 +58,6 @@ if __name__ == "__main__":
     smilhandler = SmallSMILHandler()
     parser.setContentHandler(smilhandler)
     parser.parse(open('karaoke.smil'))
-    print(smilhandler.etiquetas)
-    print(smilhandler.etiquetas[0])
+    smilhandler.get_tags()
     for etiqueta in smilhandler.etiquetas:
         print(etiqueta['etiqueta'])
