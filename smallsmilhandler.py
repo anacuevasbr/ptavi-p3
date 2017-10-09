@@ -30,7 +30,7 @@ class SmallSMILHandler(ContentHandler):
             self.etiquetas.append(Dict)
 
     def get_tags(self):
-        print(self.etiquetas)
+        return self.etiquetas
 
 if __name__ == "__main__":
     """
@@ -40,4 +40,4 @@ if __name__ == "__main__":
     smilhandler = SmallSMILHandler()
     parser.setContentHandler(smilhandler)
     parser.parse(open('karaoke.smil'))
-    smilhandler.get_tags()
+    print(smilhandler.get_tags())
