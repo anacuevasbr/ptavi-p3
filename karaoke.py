@@ -23,6 +23,5 @@ if __name__ == "__main__":
         for atributo in etiqueta:
             if atributo != 'name':
                 lista.append('\t' + atributo + '="' + etiqueta[atributo] +'"')
-       print(' '.join(lista))
-
-    json.dump(smilhandler.etiquetas, karaoke.json)
+        print(' '.join(lista))
+    json.dump(smilhandler.etiquetas, open('karaoke.json', 'w'))
