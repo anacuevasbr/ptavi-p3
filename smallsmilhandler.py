@@ -12,41 +12,22 @@ class SmallSMILHandler(ContentHandler):
         Constructor. Inicializamos las variables
         """
         self.etiquetas = []
+        self.lista_etiq = ["root-layout", "region", "img", "audio", "textstream"]
+        self.coleccion_attr = {'root-layout': ['width', 'height', 'background-color'],
+                            'region': ['id', 'top', 'bottom', 'left', 'right'],
+                            'img': ['src', 'region', 'begin', 'dur'],
+                            'audio': ['src', 'begin', 'dur'],
+                            'textstream':['src', 'region']}
+
 
     def startElement(self, name, attrs):
 
-        if name == "root-layout":
-            root_layout = {'nombre': 'root-layout'}
-            root_layout['width'] = attrs.get('width', "")
-            root_layout['height'] = attrs.get('height', "")
-            root_layout['background-color'] = attrs.get('background-color', "")
-            self.etiquetas.append(root_layout)
-        elif name == "region":
-            region = {'nombre': 'region'}
-            region['id'] = attrs.get('id', "")
-            region['top'] = attrs.get('top', "")
-            region['bottom'] = attrs.get('bottom', "")
-            region['left'] = attrs.get('left', "")
-            region['right'] = attrs.get('right', "")
-            self.etiquetas.append(region)
-        elif name == "img":
-            img = {'nombre': 'img'}
-            img['src'] = attrs.get('src', "")
-            img['region'] = attrs.get('region', "")
-            img['begin'] = attrs.get('begin', "")
-            img['dur'] = attrs.get('dur', "")
-            self.etiquetas.append(img)
-        elif name == "audio":
-            audio = {'nombre': 'audio'}
-            audio['src'] = attrs.get('src', "")
-            audio['begin'] = attrs.get('begin', "")
-            audio['dur'] = attrs.get('dur', "")
-            self.etiquetas.append(audio)
-        elif name == "textstream":
-            textstream = {'nombre': 'textstream'}
-            textstream['src'] = attrs.get('src', "")
-            textstream['region'] = attrs.get('region', "")
-            self.etiquetas.append(textstream)
+        if name in self.lista_etiq:
+            Dict = {}
+            Dict['name'] = name
+            for atributo in self.coleccion_attr[name]:
+                Dict[atributo] = attrs.get(atributo, "")
+            self.etiquetas.append(Dict)
 
     def get_tags(self):
         print(self.etiquetas)
@@ -60,5 +41,3 @@ if __name__ == "__main__":
     parser.setContentHandler(smilhandler)
     parser.parse(open('karaoke.smil'))
     smilhandler.get_tags()
-    for etiqueta in smilhandler.etiquetas:
-        print(etiqueta['nombre'])
