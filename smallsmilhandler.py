@@ -12,13 +12,15 @@ class SmallSMILHandler(ContentHandler):
         Constructor. Inicializamos las variables
         """
         self.etiquetas = []
-        self.lista_etiq = ["root-layout", "region", "img", "audio", "textstream"]
-        self.coleccion_attr = {'root-layout': ['width', 'height', 'background-color'],
-                            'region': ['id', 'top', 'bottom', 'left', 'right'],
-                            'img': ['src', 'region', 'begin', 'dur'],
-                            'audio': ['src', 'begin', 'dur'],
-                            'textstream':['src', 'region']}
-
+        self.lista_etiq = ["root-layout", "region", "img", "audio",
+                           "textstream"]
+        self.coleccion_attr = {'root-layout': ['width', 'height',
+                               'background-color'],
+                               'region': ['id', 'top', 'bottom', 'left',
+                                          'right'],
+                               'img': ['src', 'region', 'begin', 'dur'],
+                               'audio': ['src', 'begin', 'dur'],
+                               'textstream': ['src', 'region']}
 
     def startElement(self, name, attrs):
 
