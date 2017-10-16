@@ -27,7 +27,7 @@ class KaraokeLocal(smallsmilhandler.SmallSMILHandler):
                     lista.append('\t' + atributo + '="' + etiqueta[atributo] +
                                  '"')
             lista.append('\n')
-        return(' '.join(lista))
+        return(''.join(lista))
 
     def to_json(self, fichero, fichj=''):
         if fichj == '':
