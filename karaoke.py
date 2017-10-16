@@ -52,4 +52,5 @@ if __name__ == "__main__":
     print(karaoke.__str__())
     karaoke.to_json(sys.argv[1])
     karaoke.do_local()
+    karaoke.to_json(sys.argv[1], 'local.json')
     print(karaoke.__str__())
