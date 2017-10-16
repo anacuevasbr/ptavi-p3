@@ -46,8 +46,11 @@ if __name__ == "__main__":
 
     if len(sys.argv) != 2:
         sys.exit("Usage: python3 karaoke.py file.smil")
+    try:
+        karaoke = KaraokeLocal(sys.argv[1])
+    except FileNotFoundError:
+        sys.exit("File doesn't exist")
 
-    karaoke = KaraokeLocal(sys.argv[1])
     print(karaoke.__str__())
     karaoke.to_json(sys.argv[1])
     karaoke.do_local()
