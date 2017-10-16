@@ -10,8 +10,12 @@ import json
 
 
 class KaraokeLocal(smallsmilhandler.SmallSMILHandler):
+    """ clase para gestinar karaoke de tipo smil
+    """
 
     def __init__(self, fichero):
+        """inicializador, llama al parser y crea estructura de datos
+        """
         parser = make_parser()
         smilhandler = smallsmilhandler.SmallSMILHandler()
         parser.setContentHandler(smilhandler)
@@ -19,6 +23,8 @@ class KaraokeLocal(smallsmilhandler.SmallSMILHandler):
         self.etiquetas = smilhandler.get_tags()
 
     def __str__(self):
+        """Devuelve un string con todos los datos
+        """
         lista = []
         for etiqueta in self.etiquetas:
             lista.append(etiqueta['name'])
@@ -30,11 +36,15 @@ class KaraokeLocal(smallsmilhandler.SmallSMILHandler):
         return(''.join(lista))
 
     def to_json(self, fichero, fichj=''):
+        """Convierte nuestra estructura de datos en un json
+        """
         if fichj == '':
             fichj = fichero.split('.')[0] + '.json'
         json.dump(self.etiquetas, open(fichj, 'w'))
 
     def do_local(self):
+        """descarga archivos y modifica para que esten en local
+        """
         for etiqueta in self.etiquetas:
             for atributo in etiqueta:
                 if atributo == 'src' and not etiqueta[atributo].find('http'):
