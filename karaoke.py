@@ -18,19 +18,18 @@ class KaraokeLocal(smallsmilhandler.SmallSMILHandler):
         parser.parse(open(fichero))
         self.etiquetas = smilhandler.get_tags()
 
-
     def __str__(self):
         lista = []
         for etiqueta in self.etiquetas:
             lista.append(etiqueta['name'])
             for atributo in etiqueta:
                 if atributo != 'name' and etiqueta[atributo] != "":
-                    lista.append('\t' + atributo + '="' + etiqueta[atributo]
-                                 + '"')
+                    lista.append('\t' + atributo + '="' + etiqueta[atributo] +
+                                 '"')
             lista.append('\n')
         return(' '.join(lista))
 
-    def to_json(self, fichero, fichj = ''):
+    def to_json(self, fichero, fichj=''):
         if fichj == '':
             fichj = fichero.split('.')[0] + '.json'
         json.dump(self.etiquetas, open(fichj, 'w'))
