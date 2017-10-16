@@ -18,10 +18,10 @@ class KaraokeLocal(smallsmilhandler.SmallSMILHandler):
         parser.parse(open(fichero))
         self.etiquetas = smilhandler.get_tags()
 
+
     def __str__(self):
         lista = []
         for etiqueta in self.etiquetas:
-            #lista = []
             lista.append(etiqueta['name'])
             for atributo in etiqueta:
                 if atributo != 'name' and etiqueta[atributo] != "":
@@ -30,8 +30,10 @@ class KaraokeLocal(smallsmilhandler.SmallSMILHandler):
             lista.append('\n')
         return(' '.join(lista))
 
-    def to_json(self):
-        json.dump(self.etiquetas, open('karaoke.json', 'w'))
+    def to_json(self, fichero, fichj = ''):
+        if fichj == '':
+            fichj = fichero.split('.')[0] + '.json'
+        json.dump(self.etiquetas, open(fichj, 'w'))
 
     def do_local(self):
         for etiqueta in self.etiquetas:
@@ -39,6 +41,7 @@ class KaraokeLocal(smallsmilhandler.SmallSMILHandler):
                 if atributo == 'src' and not etiqueta[atributo].find('http'):
                     nombre = etiqueta[atributo]
                     urlretrieve(nombre, nombre.split('/')[-1])
+                    etiqueta[atributo] = nombre.split('/')[-1]
 
 if __name__ == "__main__":
 
@@ -47,5 +50,6 @@ if __name__ == "__main__":
 
     karaoke = KaraokeLocal(sys.argv[1])
     print(karaoke.__str__())
-    karaoke.to_json()
+    karaoke.to_json(sys.argv[1])
     karaoke.do_local()
+    print(karaoke.__str__())
