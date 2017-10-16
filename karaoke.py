@@ -51,8 +51,8 @@ if __name__ == "__main__":
     except FileNotFoundError:
         sys.exit("File doesn't exist")
 
-    print(karaoke.__str__())
+    print(karaoke)
     karaoke.to_json(sys.argv[1])
     karaoke.do_local()
     karaoke.to_json(sys.argv[1], 'local.json')
-    print(karaoke.__str__())
+    print(karaoke)
